@@ -83,7 +83,7 @@ try {
   "type": "library",
   "license": "MIT",
   "authors": [
-    { "name": "Samson Kwiz", "email": "you@example.com" }
+    { "name": "Samson Kwiz", "email": "kwikisamson@gmail.com" }
   ],
   "require": {
     "php": ">=7.0",
