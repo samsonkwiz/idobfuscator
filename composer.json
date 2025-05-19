@@ -4,7 +4,10 @@
   "type": "library",
   "license": "MIT",
   "authors": [
-    { "name": "Samson Kwiz", "email": "kwikisamson@gmail.com" }
+    {
+      "name": "Samson Kwiz",
+      "email": "kwikisamson@gmail.com"
+    }
   ],
   "require": {
     "php": ">=7.0",
@@ -15,5 +18,5 @@
       "SamsonKwiz\\IDObfuscator\\": "src/"
     }
   },
-  "minimum-stability": "stable"
+  "prefer-stable": true
 }
