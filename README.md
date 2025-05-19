@@ -1,74 +1,133 @@
-# IDObfuscator
+# IDObfuscator for PHP
 
-A PHP library for securely obfuscating and deobfuscating numeric IDs into fixed‑length, unpredictable, numeric strings using BCMath.
+Secure, reversible numeric ID obfuscation for PHP using BCMath.
 
-**Repository:** [https://github.com/samsonkwiz/idobfuscator](https://github.com/samsonkwiz/idobfuscator) 
-**Packagist:** [https://packagist.org/packages/samsonkwiz/idobfuscator](https://packagist.org/packages/samsonkwiz/idobfuscator)
+IDObfuscator lets you:
 
----
+- Generate unpredictable numbers for tokens, card numbers, and references.
+- Mask your database auto-increment IDs with deterministic, non-sequential values.
+- Protect sensitive numeric identifiers in URLs, APIs, and logs.
+
+Thanks to BCMath, it handles arbitrarily large integers and guarantees exact round-trip encoding/decoding.
+
+## Requirements
+
+- PHP 7.0 or higher
+- BCMath extension (ext-bcmath)
 
 ## Installation
+
+Install via Composer (recommended):
 
 ```bash
 composer require samsonkwiz/idobfuscator
 ```
 
-> Requires PHP >= 7.0 and the BCMath extension.
+### Other installation methods
 
----
+**1. Clone the repository and install dependencies**
 
-## Usage
+```bash
+git clone https://github.com/samsonkwiz/idobfuscator.git
+cd idobfuscator
+composer install
+```
 
-### 1. Testing ID Obfuscation Class
+**2. Download ZIP**
 
-```php
-echo "<h3>Testing ID Obfuscation Class</h3>";
+- Go to https://github.com/samsonkwiz/idobfuscator
+- Click **"Code" → "Download ZIP"**, extract the archive
+- Ensure Composer autoloader is available or include source files manually
 
-try {
-    $instance = new IDObfuscator();
-    for ($i = 149937; $i < 149945; $i++) {
-        $encoded = $instance->encode($i);
-        $decoded = $instance->decode($encoded);
-        printf("ID: %6d → %11s → %6d<br>", $i, $encoded, $decoded);
-    }
-} catch (Exception $e) {
-    echo "<div style='color:red'>Error: " . htmlspecialchars($e->getMessage()) . "</div>";
+**3. Git submodule**
+
+```bash
+git submodule add https://github.com/samsonkwiz/idobfuscator.git path/to/IDObfuscator
+```
+
+Then update your project's `composer.json` autoload section:
+
+```json
+"autoload": {
+  "psr-4": {
+    "SamsonKwiz\IDObfuscator\": "path/to/IDObfuscator/src/"
+  }
 }
 ```
 
-### 2. Using Static Methods
-
-```php
-echo "<h4>Using static methods:</h4>";
-
-try {
-    for ($i = 149945; $i < 149957; $i++) {
-        $encoded = IDObfuscator::obfuscate($i);
-        $decoded = IDObfuscator::deobfuscate($encoded);
-        printf("ID: %6d → %11s → %6d<br>", $i, $encoded, $decoded);
-    }
-} catch (Exception $e) {
-    echo "<div style='color:red'>Error: " . htmlspecialchars($e->getMessage()) . "</div>";
-}
+Run:
+```bash
+composer dump-autoload
 ```
 
-### 3. Using Custom Parameters
+**4. Packagist**
 
-```php
-echo "<h4>Using custom parameters:</h4>";
+The package is now available on Packagist. Simply run:
 
-try {
-    $customSalt = '246802468';
-    $customKey  = '13579135';
-    $customLen  = 12;
-    $customOb   = new IDObfuscator($customSalt, $customKey, $customLen);
-
-    for ($i = 149950; $i < 149957; $i++) {
-        $encoded = $customOb->encode($i);
-        $decoded = $customOb->decode($encoded);
-        printf("ID: %6d → %{$customLen}s → %6d<br>", $i, $encoded, $decoded);
-    }
-} catch (Exception $e) {
-    echo "<div style='color:red'>Error: " . htmlspecialchars($e->getMessage()) . "</div>";
-}
+```bash
+composer require samsonkwiz/idobfuscator
 ```
+
+## Usage## Usage
+
+1. **Include Composer’s autoloader**
+
+   ```php
+   require __DIR__ . '/vendor/autoload.php';
+   ```
+
+2. **Import the class**
+
+   ```php
+   use SamsonKwiz\IDObfuscator\IDObfuscator;
+   ```
+
+3. **Instantiate and encode/decode IDs**
+
+   **A. Using instance methods**
+
+   ```php
+   // Create a new obfuscator instance with default settings
+   $obfuscator = new IDObfuscator();
+
+   $originalId = 12345;
+   $encoded    = $obfuscator->encode($originalId);   // e.g. "004829374"
+   $decoded    = $obfuscator->decode($encoded);     // back to 12345
+
+   echo "ID {$originalId} → {$encoded} → {$decoded}";
+   ```
+
+   **B. Using static helper methods**
+
+   ```php
+   $originalId = 54321;
+   $encoded    = IDObfuscator::obfuscate($originalId);
+   $decoded    = IDObfuscator::deobfuscate($encoded);
+
+   echo "ID {$originalId} → {$encoded} → {$decoded}";
+   ```
+
+4. **Customize salt, key, and output length** (optional)
+
+   ```php
+   $salt     = '246802468';
+   $key      = '13579135';
+   $length   = 12;  // exact length of the obfuscated string
+
+   // Create a custom obfuscator
+   $customOb = new IDObfuscator($salt, $key, $length);
+
+   $id       = 98765;
+   $encoded  = $customOb->encode($id);
+   $decoded  = $customOb->decode($encoded);
+
+   echo "Custom ID {$id} → {$encoded} → {$decoded}";
+   ```
+
+## Contributing
+
+Contributions are welcome! Please fork the repository and open a pull request.
+
+## License
+
+This library is released under the MIT License.
