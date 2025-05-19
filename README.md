@@ -2,7 +2,8 @@
 
 A PHP library for securely obfuscating and deobfuscating numeric IDs into fixed‑length, unpredictable, numeric strings using BCMath.
 
-**Repository:** [https://github.com/samsonkwiz/idobfuscator](https://github.com/samsonkwiz/idobfuscator) **Packagist:** [https://packagist.org/packages/samsonkwiz/idobfuscator](https://packagist.org/packages/samsonkwiz/idobfuscator)
+**Repository:** [https://github.com/samsonkwiz/idobfuscator](https://github.com/samsonkwiz/idobfuscator) 
+**Packagist:** [https://packagist.org/packages/samsonkwiz/idobfuscator](https://packagist.org/packages/samsonkwiz/idobfuscator)
 
 ---
 
@@ -69,31 +70,5 @@ try {
     }
 } catch (Exception $e) {
     echo "<div style='color:red'>Error: " . htmlspecialchars($e->getMessage()) . "</div>";
-}
-```
-
----
-
-## composer.json
-
-```json
-{
-  "name": "samsonkwiz/idobfuscator",
-  "description": "Reversible numeric ID obfuscation for PHP using BCMath",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    { "name": "Samson Kwiz", "email": "kwikisamson@gmail.com" }
-  ],
-  "require": {
-    "php": ">=7.0",
-    "ext-bcmath": "*"
-  },
-  "autoload": {
-    "psr-4": {
-      "SamsonKwiz\\IDObfuscator\\": "src/"
-    }
-  },
-  "minimum-stability": "stable"
 }
 ```
