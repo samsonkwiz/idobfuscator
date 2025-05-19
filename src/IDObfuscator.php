@@ -11,6 +11,8 @@
  *
  * @author Your Name
  */
+namespace SamsonKwiz\IDObfuscator;
+
 class IDObfuscator {
     /** @var string Secret salt value (<1e10) */
     private $salt;
