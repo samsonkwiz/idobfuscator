@@ -9,7 +9,7 @@
  * - PHP 7.0+ (compatible with PHP 7.0 - 8.2)
  * - BCMath extension
  *
- * @author Your Name
+ * @author Samson Kwiz
  */
 namespace SamsonKwiz\IDObfuscator;
 
