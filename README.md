@@ -50,7 +50,7 @@ Then update your project's `composer.json` autoload section:
 ```json
 "autoload": {
   "psr-4": {
-    "SamsonKwiz\\IDObfuscator\\": "vendor/samsonkwiz/idobfuscator/src/"
+    "SamsonKwiz\\IDObfuscator\\": "src/"
   }
 }
 ```
