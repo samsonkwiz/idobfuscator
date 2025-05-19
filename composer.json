@@ -15,7 +15,7 @@
   },
   "autoload": {
     "psr-4": {
-      "SamsonKwiz\\IDObfuscator\\": "src/"
+     "SamsonKwiz\\IDObfuscator\\": "vendor/samsonkwiz/idobfuscator/src/"
     }
   },
   "prefer-stable": true
